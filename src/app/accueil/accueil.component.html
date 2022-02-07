@@ -1,0 +1,119 @@
+<section>
+  <h1>Impots</h1>
+  <h2>Outil d'aide à la rédaction des frais réels fonciers</h2>
+
+
+  <div mat-subheader>Pour commencer, renseignez ces informations</div>
+
+  <mat-accordion multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Mes biens
+        </mat-panel-title>
+        <mat-panel-description>
+          {{data.biens.length}}
+          <mat-icon>{{data.biens.length === 0 ? 'radio_button_unchecked' : 'task_alt'}}</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-list>
+        <mat-list-item *ngFor="let bien of data.biens; index as index">{{bien.nom}}
+          <button mat-icon-button (click)="deleteBien(index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+
+      <form [formGroup]="bienFG" (submit)="newBien()">
+        <mat-form-field>
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="nom">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Adresse</mat-label>
+          <textarea matInput formControlName="adresse"></textarea>
+        </mat-form-field>
+
+        <button mat-flat-button type="submit"
+                [disabled]="bienFG.invalid"
+                color="accent">Ajouter
+        </button>
+      </form>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Mes prestataires
+        </mat-panel-title>
+        <mat-panel-description>
+          {{data.prestataires.length}}
+          <mat-icon>{{data.prestataires.length === 0 ? 'radio_button_unchecked' : 'task_alt'}}</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-list>
+        <mat-list-item *ngFor="let presta of data.prestataires; index as index">{{presta.nom}}
+          <button mat-icon-button (click)="deletePresta(index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+
+      <form [formGroup]="prestaFG" (submit)="newPresta()">
+        <mat-form-field>
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="nom">
+        </mat-form-field>
+
+        <button mat-flat-button type="submit"
+                [disabled]="prestaFG.invalid"
+                color="accent">Ajouter
+        </button>
+      </form>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Mes types de frais
+        </mat-panel-title>
+        <mat-panel-description>
+          {{data.frais.length}}
+          <mat-icon>{{data.frais.length === 0 ? 'radio_button_unchecked' : 'task_alt'}}</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-list>
+        <mat-list-item *ngFor="let frai of data.frais; index as index">{{frai.nom}}
+          <button mat-icon-button (click)="deleteFrais(index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+
+      <form [formGroup]="fraisFG" (submit)="newFrais()">
+        <mat-form-field>
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="nom">
+        </mat-form-field>
+
+        <button mat-flat-button type="submit"
+                [disabled]="fraisFG.invalid"
+                color="accent">Ajouter
+        </button>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <button [routerLink]="['calcul']"
+          mat-flat-button
+          color="primary"
+          [disabled]="data.frais.length === 0 || data.prestataires.length === 0 || data.biens.length === 0"
+  >Lancer un calcul !
+  </button>
+
+</section>

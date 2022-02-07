@@ -1,0 +1,26 @@
+:host {
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  mat-accordion {
+    width: 70vw;
+    .mat-expansion-panel-header-description {
+      justify-content: flex-end;
+      align-items: center;
+
+      mat-icon {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+
+  button {
+    margin-top: 1rem;
+  }
+}
