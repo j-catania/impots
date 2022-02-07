@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {DataService} from '../services/data.service';
+import {AppService} from '../services/app.service';
 
 @Component({
   selector: 'app-accueil',
@@ -9,7 +9,7 @@ import {DataService} from '../services/data.service';
 })
 export class AccueilComponent implements OnInit {
 
-  data = this.dataService.data.value;
+  data = this.appService.savedData.value;
 
   bienFG = new FormGroup({
     nom: new FormControl(null, Validators.required),
@@ -25,22 +25,25 @@ export class AccueilComponent implements OnInit {
     prix: new FormControl(null, Validators.required),
   });
 
-  constructor(private dataService: DataService) { }
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
   }
 
   newBien() {
     this.data.biens.push(this.bienFG.getRawValue());
+    this.bienFG.reset();
     this.update();
   }
 
   newPresta() {
     this.data.prestataires.push(this.prestaFG.getRawValue());
+    this.prestaFG.reset();
     this.update();
   }
   newFrais() {
-    this.data.frais.push(this.fraisFG.getRawValue());
+    this.data.typeFrais.push(this.fraisFG.getRawValue());
+    this.fraisFG.reset();
     this.update();
   }
   deletePresta(index: number){
@@ -52,12 +55,12 @@ export class AccueilComponent implements OnInit {
     this.update();
   }
   deleteFrais(index: number){
-    this.data.frais.splice(index, 1);
+    this.data.typeFrais.splice(index, 1);
     this.update();
   }
 
   private update() {
-    this.dataService.data.next(this.data);
+    this.appService.savedData.next(this.data);
   }
 
 }

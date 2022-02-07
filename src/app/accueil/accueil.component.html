@@ -36,10 +36,12 @@
           <textarea matInput formControlName="adresse"></textarea>
         </mat-form-field>
 
-        <button mat-flat-button type="submit"
-                [disabled]="bienFG.invalid"
-                color="accent">Ajouter
-        </button>
+        <div>
+          <button mat-flat-button type="submit"
+                  [disabled]="bienFG.invalid"
+                  color="accent">Ajouter
+          </button>
+        </div>
       </form>
 
     </mat-expansion-panel>
@@ -68,10 +70,12 @@
           <input matInput formControlName="nom">
         </mat-form-field>
 
-        <button mat-flat-button type="submit"
-                [disabled]="prestaFG.invalid"
-                color="accent">Ajouter
-        </button>
+        <div>
+          <button mat-flat-button type="submit"
+                  [disabled]="prestaFG.invalid"
+                  color="accent">Ajouter
+          </button>
+        </div>
       </form>
 
     </mat-expansion-panel>
@@ -81,13 +85,13 @@
           Mes types de frais
         </mat-panel-title>
         <mat-panel-description>
-          {{data.frais.length}}
-          <mat-icon>{{data.frais.length === 0 ? 'radio_button_unchecked' : 'task_alt'}}</mat-icon>
+          {{data.typeFrais.length}}
+          <mat-icon>{{data.typeFrais.length === 0 ? 'radio_button_unchecked' : 'task_alt'}}</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <mat-list>
-        <mat-list-item *ngFor="let frai of data.frais; index as index">{{frai.nom}}
+        <mat-list-item *ngFor="let frai of data.typeFrais; index as index">{{frai.nom}}
           <button mat-icon-button (click)="deleteFrais(index)">
             <mat-icon>delete</mat-icon>
           </button>
@@ -100,10 +104,12 @@
           <input matInput formControlName="nom">
         </mat-form-field>
 
-        <button mat-flat-button type="submit"
-                [disabled]="fraisFG.invalid"
-                color="accent">Ajouter
-        </button>
+        <div>
+          <button mat-flat-button type="submit"
+                  [disabled]="fraisFG.invalid"
+                  color="accent">Ajouter
+          </button>
+        </div>
       </form>
     </mat-expansion-panel>
   </mat-accordion>
@@ -112,7 +118,7 @@
   <button [routerLink]="['calcul']"
           mat-flat-button
           color="primary"
-          [disabled]="data.frais.length === 0 || data.prestataires.length === 0 || data.biens.length === 0"
+          [disabled]="data.typeFrais.length === 0 || data.prestataires.length === 0 || data.biens.length === 0"
   >Lancer un calcul !
   </button>
 

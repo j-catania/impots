@@ -9,12 +9,24 @@
 
   mat-accordion {
     width: 70vw;
+
     .mat-expansion-panel-header-description {
       justify-content: flex-end;
       align-items: center;
 
       mat-icon {
         margin-left: 0.5rem;
+      }
+    }
+    form {
+      display: flex;
+      align-items: baseline;
+      > * {
+        flex: 1;
+        margin: 0 5px;
+      }
+      > div {
+        flex: 0;
       }
     }
   }

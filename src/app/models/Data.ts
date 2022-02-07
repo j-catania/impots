@@ -1,9 +1,9 @@
 import Bien from './Bien';
-import Frais from './Frais';
 import Prestataire from './Prestataire';
+import TypeFrais from './TypeFrais';
 
 export default interface Data {
   prestataires: Prestataire[];
   biens: Bien[];
-  frais: Frais[];
+  typeFrais: TypeFrais[];
 }
