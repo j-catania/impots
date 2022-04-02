@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AppService} from '../services/app.service';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'app-accueil',
@@ -20,9 +21,9 @@ export class AccueilComponent implements OnInit {
     nom: new FormControl(null, Validators.required),
   });
 
-  fraisFG = new FormGroup({
+  typeFraisFG = new FormGroup({
     nom: new FormControl(null, Validators.required),
-    prix: new FormControl(null, Validators.required),
+    prestataire: new FormControl(null, Validators.required),
   });
 
   constructor(private appService: AppService) { }
@@ -31,19 +32,19 @@ export class AccueilComponent implements OnInit {
   }
 
   newBien() {
-    this.data.biens.push(this.bienFG.getRawValue());
+    this.data.biens.push({id: v4(), ...this.bienFG.getRawValue()});
     this.bienFG.reset();
     this.update();
   }
 
   newPresta() {
-    this.data.prestataires.push(this.prestaFG.getRawValue());
+    this.data.prestataires.push({id: v4(), ...this.prestaFG.getRawValue()});
     this.prestaFG.reset();
     this.update();
   }
   newFrais() {
-    this.data.typeFrais.push(this.fraisFG.getRawValue());
-    this.fraisFG.reset();
+    this.data.typeFrais.push({id: v4(), ...this.typeFraisFG.getRawValue()});
+    this.typeFraisFG.reset();
     this.update();
   }
   deletePresta(index: number){

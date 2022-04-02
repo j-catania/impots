@@ -1,35 +1,17 @@
-<mat-stepper #stepper>
-  <mat-step>
-    <form>
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Last name, First name" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step label="Fill out your address">
-    <form>
-      <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input matInput placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-stepper>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef> Nom</th>
+    <td mat-cell *matCellDef="let element"> {{element.nom}} - {{element.prestataire.nom}} </td>
+  </ng-container>
+
+  <ng-container [matColumnDef]="bien.nom" *ngFor="let bien of biens">
+    <th mat-header-cell *matHeaderCellDef> {{bien.nom}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.prix}}€ </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<button mat-button (click)="ajouterFrais()">Ajouter un frais</button>

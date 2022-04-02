@@ -91,22 +91,30 @@
       </mat-expansion-panel-header>
 
       <mat-list>
-        <mat-list-item *ngFor="let frai of data.typeFrais; index as index">{{frai.nom}}
+        <mat-list-item *ngFor="let frai of data.typeFrais; index as index">{{frai.nom}} - {{frai.prestataire.nom}}
           <button mat-icon-button (click)="deleteFrais(index)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-list-item>
       </mat-list>
 
-      <form [formGroup]="fraisFG" (submit)="newFrais()">
+      <form [formGroup]="typeFraisFG" (submit)="newFrais()">
         <mat-form-field>
           <mat-label>Nom</mat-label>
           <input matInput formControlName="nom">
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>Prestataire</mat-label>
+          <mat-select formControlName="prestataire">
+            <mat-option *ngFor="let presta of data.prestataires" [value]="presta">
+              {{presta.nom}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
         <div>
           <button mat-flat-button type="submit"
-                  [disabled]="fraisFG.invalid"
+                  [disabled]="typeFraisFG.invalid"
                   color="accent">Ajouter
           </button>
         </div>
@@ -118,7 +126,7 @@
   <button [routerLink]="['calcul']"
           mat-flat-button
           color="primary"
-          [disabled]="data.typeFrais.length === 0 || data.prestataires.length === 0 || data.biens.length === 0"
+          [disabled]="data.prestataires.length === 0 || data.biens.length === 0"
   >Lancer un calcul !
   </button>
 
