@@ -1,4 +1,5 @@
 # Impots
+[![Node.js CI](https://github.com/j-catania/impots/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/j-catania/impots/actions/workflows/node.js.yml)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
 
