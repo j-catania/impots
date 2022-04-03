@@ -1,5 +1,5 @@
 <h3>Informations</h3>
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form (ngSubmit)="submit()" [formGroup]="form">
   <div class="flex-line">
     <mat-form-field>
       <mat-label>Type</mat-label>
@@ -10,26 +10,29 @@
     </mat-form-field>
     <mat-form-field *ngIf="form.get('type')?.value === 'autre'">
       <mat-label>Autre type</mat-label>
-      <input matInput formControlName="autre">
+      <input formControlName="autre" matInput>
     </mat-form-field>
   </div>
   <div class="flex-line">
     <mat-form-field>
       <mat-label>Prix</mat-label>
-      <input matInput formControlName="prix" type="number">
+      <input formControlName="prix" matInput type="number">
       <mat-icon matSuffix>euro</mat-icon>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Date de réalisation</mat-label>
-      <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <input [matDatepicker]="picker" [max]="maxDate" formControlName="date" matInput>
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
 
   <h3>Bien(s) affecté(s)</h3>
-  <div *ngFor="let bien of form.get('biens')?.value">{{bien.bien.nom}} {{bien.pourcent}}% ({{form.get('prix')?.value * bien.pourcent / 100}}€)</div>
+  <h5>Il reste {{100 - activePercent}}% à ventiller</h5>
+  <div *ngFor="let bien of form.get('biens')?.value">{{bien.bien.nom}} {{bien.pourcent}}%
+    ({{form.get('prix')?.value * bien.pourcent / 100}}€)
+  </div>
 
   <h4>Ajouter un bien</h4>
   <div class="flex-line">
@@ -42,21 +45,23 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Pourcentage</mat-label>
-        <input matInput formControlName="pourcent" type="number">
+        <input formControlName="pourcent" matInput type="number">
         <mat-icon matSuffix>percent</mat-icon>
       </mat-form-field>
       <ng-container *ngIf="formBien.get('pourcent')?.value">
-        ({{form.get('prix')?.value * formBien.get('pourcent')?.value  / 100}}€)
+        ({{form.get('prix')?.value * formBien.get('pourcent')?.value / 100}}€)
       </ng-container>
       <div class="flex-line">
-        <button mat-raised-button [disabled]="formBien.invalid && form.invalid" (click)="addBien()">Ajouter le bien au frais en cours</button>
+        <button (click)="addBien()" [disabled]="formBien.invalid && form.invalid" mat-raised-button>Ajouter le bien au
+          frais en cours
+        </button>
       </div>
     </form>
   </div>
 
   <div class="flex-line actions">
-    <button mat-raised-button color="accent" type="reset">Réinitialiser</button>
-    <button mat-raised-button [disabled]="form.invalid">Ajouter</button>
+    <button color="accent" mat-raised-button type="reset">Réinitialiser</button>
+    <button [disabled]="form.invalid && activePercent !== 100" mat-raised-button>Ajouter</button>
   </div>
 
 </form>

@@ -1,17 +1,17 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
 
-  <ng-container matColumnDef="nom">
-    <th mat-header-cell *matHeaderCellDef> Nom</th>
-    <td mat-cell *matCellDef="let element"> {{element.nom}} - {{element.prestataire.nom}} </td>
-  </ng-container>
+    <ng-container matColumnDef="nom">
+      <th *matHeaderCellDef mat-header-cell> Nom</th>
+      <td *matCellDef="let element" mat-cell> {{element.nom}} - {{element.prestataire.nom}} </td>
+    </ng-container>
 
-  <ng-container [matColumnDef]="bien.nom" *ngFor="let bien of biens">
-    <th mat-header-cell *matHeaderCellDef> {{bien.nom}} </th>
-    <td mat-cell *matCellDef="let element"> {{element.prix}}€ </td>
-  </ng-container>
+    <ng-container *ngFor="let bien of biens" [matColumnDef]="bien.nom">
+      <th *matHeaderCellDef mat-header-cell> {{bien.nom}} </th>
+      <td *matCellDef="let element" mat-cell> {{element.prix}}€</td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
-</table>
-<button mat-button (click)="ajouterFrais()">Ajouter un frais</button>
+  </table>
+  <button (click)="ajouterFrais()" color="primary" mat-stroked-button>Ajouter un frais</button>

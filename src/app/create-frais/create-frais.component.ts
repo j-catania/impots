@@ -25,6 +25,8 @@ export class CreateFraisComponent implements OnInit {
   biens = this.appService.savedData.value.biens;
   maxDate = new Date()
 
+  activePercent: number = 0;
+
   constructor(private appService: AppService, public dialogRef: MatDialogRef<CreateFraisComponent>) {
   }
 
@@ -39,8 +41,14 @@ export class CreateFraisComponent implements OnInit {
     })
   }
 
-  addBien(){
+  addBien() {
     this.form.get('biens')?.value.push(this.formBien.getRawValue())
+
+    this.activePercent = this.form.get('biens')?.value
+      .map((bien: { pourcent: number; }) => bien.pourcent)
+      .reduce((accumulator: number, value: number) => {
+        return accumulator + value;
+      }, 0);
     this.formBien.reset()
   }
 
