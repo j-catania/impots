@@ -1,5 +1,5 @@
 <section>
-  <h1>Impots</h1>
+  <!--<h1>Impots</h1>-->
   <h2>Outil d'aide à la rédaction des frais réels fonciers</h2>
 
 
@@ -18,30 +18,36 @@
       </mat-expansion-panel-header>
 
       <mat-list>
-        <mat-list-item *ngFor="let bien of data.biens; index as index">{{bien.nom}}
-          <button mat-icon-button (click)="deleteBien(index)">
-            <mat-icon>delete</mat-icon>
-          </button>
+        <mat-list-item *ngFor="let bien of data.biens; index as index">
+          <div class="flex-line">
+            {{bien.nom}}
+            <button (click)="deleteBien(index)" mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </mat-list-item>
       </mat-list>
 
-      <form [formGroup]="bienFG" (submit)="newBien()">
-        <mat-form-field>
-          <mat-label>Nom</mat-label>
-          <input matInput formControlName="nom">
-        </mat-form-field>
+      <form (submit)="newBien()" [formGroup]="bienFG">
+        <div class="flex-line">
 
-        <mat-form-field>
-          <mat-label>Adresse</mat-label>
-          <textarea matInput formControlName="adresse"></textarea>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nom</mat-label>
+            <input formControlName="nom" matInput>
+          </mat-form-field>
 
-        <div>
-          <button mat-flat-button type="submit"
-                  [disabled]="bienFG.invalid"
-                  color="accent">Ajouter
-          </button>
+          <mat-form-field>
+            <mat-label>Adresse</mat-label>
+            <textarea formControlName="adresse" matInput></textarea>
+          </mat-form-field>
+          <div>
+            <button [disabled]="bienFG.invalid" color="accent"
+                    mat-flat-button
+                    type="submit">Ajouter
+            </button>
+          </div>
         </div>
+
       </form>
 
     </mat-expansion-panel>
@@ -57,23 +63,27 @@
       </mat-expansion-panel-header>
 
       <mat-list>
-        <mat-list-item *ngFor="let presta of data.prestataires; index as index">{{presta.nom}}
-          <button mat-icon-button (click)="deletePresta(index)">
-            <mat-icon>delete</mat-icon>
-          </button>
+
+        <mat-list-item *ngFor="let presta of data.prestataires; index as index">
+          <div class="flex-line">
+            {{presta.nom}}
+            <button (click)="deletePresta(index)" mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </mat-list-item>
       </mat-list>
 
-      <form [formGroup]="prestaFG" (submit)="newPresta()">
+      <form (submit)="newPresta()" [formGroup]="prestaFG">
         <mat-form-field>
           <mat-label>Nom</mat-label>
-          <input matInput formControlName="nom">
+          <input formControlName="nom" matInput>
         </mat-form-field>
 
         <div>
-          <button mat-flat-button type="submit"
-                  [disabled]="prestaFG.invalid"
-                  color="accent">Ajouter
+          <button [disabled]="prestaFG.invalid" color="accent"
+                  mat-flat-button
+                  type="submit">Ajouter
           </button>
         </div>
       </form>
@@ -91,17 +101,21 @@
       </mat-expansion-panel-header>
 
       <mat-list>
-        <mat-list-item *ngFor="let frai of data.typeFrais; index as index">{{frai.nom}} - {{frai.prestataire.nom}}
-          <button mat-icon-button (click)="deleteFrais(index)">
-            <mat-icon>delete</mat-icon>
-          </button>
+        <mat-list-item *ngFor="let frai of data.typeFrais; index as index">
+
+          <div class="flex-line">
+            {{frai.nom}} - {{frai.prestataire.nom}}
+            <button (click)="deleteFrais(index)" mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </mat-list-item>
       </mat-list>
 
-      <form [formGroup]="typeFraisFG" (submit)="newFrais()">
+      <form (submit)="newFrais()" [formGroup]="typeFraisFG">
         <mat-form-field>
           <mat-label>Nom</mat-label>
-          <input matInput formControlName="nom">
+          <input formControlName="nom" matInput>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Prestataire</mat-label>
@@ -113,9 +127,9 @@
         </mat-form-field>
 
         <div>
-          <button mat-flat-button type="submit"
-                  [disabled]="typeFraisFG.invalid"
-                  color="accent">Ajouter
+          <button [disabled]="typeFraisFG.invalid" color="accent"
+                  mat-flat-button
+                  type="submit">Ajouter
           </button>
         </div>
       </form>
@@ -123,10 +137,10 @@
   </mat-accordion>
 
 
-  <button [routerLink]="['calcul']"
-          mat-flat-button
+  <button [disabled]="data.prestataires.length === 0 || data.biens.length === 0"
+          [routerLink]="['calcul']"
           color="primary"
-          [disabled]="data.prestataires.length === 0 || data.biens.length === 0"
+          mat-flat-button
   >Lancer un calcul !
   </button>
 

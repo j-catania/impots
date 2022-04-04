@@ -12,6 +12,9 @@ body {
 
 .flex-line, .flex-column {
   display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  flex: unset;
 
   mat-form-field, button {
     flex: 1;

@@ -8,5 +8,8 @@
   table {
     width: 70vw;
     margin-bottom: 1rem;
+    @media (orientation: portrait) {
+      width: 98vw;
+    }
   }
 }
