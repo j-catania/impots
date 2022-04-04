@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CalculComponent} from './calcul.component';
+import {RecapComponent} from './recap.component';
 
-describe('CalculComponent', () => {
-  let component: CalculComponent;
-  let fixture: ComponentFixture<CalculComponent>;
+describe('RecapComponent', () => {
+  let component: RecapComponent;
+  let fixture: ComponentFixture<RecapComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CalculComponent]
+      declarations: [RecapComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CalculComponent);
+    fixture = TestBed.createComponent(RecapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

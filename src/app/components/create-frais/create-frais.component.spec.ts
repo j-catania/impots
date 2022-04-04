@@ -8,9 +8,9 @@ describe('CreateFraisComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateFraisComponent ]
+      declarations: [CreateFraisComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
