@@ -15,16 +15,17 @@ export class CreateFraisComponent implements OnInit {
     autre: new FormControl(null),
     prix: new FormControl(null, [Validators.required, Validators.min(1)]),
     date: new FormControl(null, Validators.required),
-    biens: new FormControl([], [Validators.required])
+    biens: new FormControl([])
   })
   formBien = new FormGroup({
     bien: new FormControl(null, Validators.required),
-    pourcent: new FormControl(null, [Validators.required, Validators.min(0.1)])
+    pourcent: new FormControl(null, [Validators.required, Validators.min(0.1), Validators.max(100)])
   })
   typesFrais = this.appService.savedData.value.typeFrais;
   biens = this.appService.savedData.value.biens;
   maxDate = new Date()
 
+  usedBienId: any = []
   activePercent: number = 0;
 
   constructor(private appService: AppService, public dialogRef: MatDialogRef<CreateFraisComponent>) {
@@ -43,13 +44,17 @@ export class CreateFraisComponent implements OnInit {
 
   addBien() {
     this.form.get('biens')?.value.push(this.formBien.getRawValue())
+    this.usedBienId.push(this.formBien.getRawValue().bien.id)
 
     this.activePercent = this.form.get('biens')?.value
       .map((bien: { pourcent: number; }) => bien.pourcent)
       .reduce((accumulator: number, value: number) => {
         return accumulator + value;
       }, 0);
+    console.log(this.usedBienId)
+    this.formBien.get('pourcent')?.setValidators([Validators.required, Validators.min(0.1), Validators.max(100 - this.activePercent)])
     this.formBien.reset()
+    this.formBien.get('pourcent')?.updateValueAndValidity()
   }
 
   submit() {
