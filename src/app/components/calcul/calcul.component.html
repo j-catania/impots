@@ -35,7 +35,7 @@
 </table>
 <div class="flex-line actions">
   <button (click)="ajouterFrais()" color="accent" mat-stroked-button>Ajouter un frais</button>
-  <button (click)="done()" [disabled]="dataSource.data.length === 0" color="primary" mat-stroked-button>
+  <button [disabled]="dataSource.data.length === 0" [routerLink]="['recap']" color="primary" mat-stroked-button>
     Terminer
   </button>
 </div>

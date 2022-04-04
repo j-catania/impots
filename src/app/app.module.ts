@@ -13,20 +13,22 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTableModule} from '@angular/material/table';
 import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AccueilComponent} from './accueil/accueil.component';
-import { CalculComponent } from './calcul/calcul.component';
-import { CreateFraisComponent } from './create-frais/create-frais.component';
+import {AccueilComponent} from './components/accueil/accueil.component';
+import {CalculComponent} from './components/calcul/calcul.component';
+import {CreateFraisComponent} from './components/create-frais/create-frais.component';
+import {RecapComponent} from './components/recap/recap.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
     CalculComponent,
-    CreateFraisComponent
+    CreateFraisComponent,
+    RecapComponent
   ],
   imports: [
     BrowserModule,

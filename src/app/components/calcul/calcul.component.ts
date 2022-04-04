@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import {v4} from 'uuid';
+import Frais from '../../models/Frais';
+import {AppService} from '../../services/app.service';
 import {CreateFraisComponent} from '../create-frais/create-frais.component';
-import Frais from '../models/Frais';
-import {AppService} from '../services/app.service';
 
 @Component({
   selector: 'app-calcul',
@@ -42,7 +42,6 @@ export class CalculComponent implements OnInit {
           biens: fraisBien
         }
         this.dataSource.data.push(frais)
-        console.log(this.dataSource.data)
         this.dataSource.data = this.dataSource.data;
       }
     });

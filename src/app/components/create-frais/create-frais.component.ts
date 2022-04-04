@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
-import {AppService} from '../services/app.service';
+import {AppService} from '../../services/app.service';
 
 @Component({
   selector: 'app-create-frais',

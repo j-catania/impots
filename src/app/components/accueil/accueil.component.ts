@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AppService} from '../services/app.service';
-import { v4 } from 'uuid';
+import {v4} from 'uuid';
+import {AppService} from '../../services/app.service';
 
 @Component({
   selector: 'app-accueil',
@@ -26,7 +26,8 @@ export class AccueilComponent implements OnInit {
     prestataire: new FormControl(null, Validators.required),
   });
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService) {
+  }
 
   ngOnInit(): void {
   }
@@ -42,20 +43,24 @@ export class AccueilComponent implements OnInit {
     this.prestaFG.reset();
     this.update();
   }
+
   newFrais() {
     this.data.typeFrais.push({id: v4(), ...this.typeFraisFG.getRawValue()});
     this.typeFraisFG.reset();
     this.update();
   }
-  deletePresta(index: number){
+
+  deletePresta(index: number) {
     this.data.prestataires.splice(index, 1);
     this.update();
   }
-  deleteBien(index: number){
+
+  deleteBien(index: number) {
     this.data.biens.splice(index, 1);
     this.update();
   }
-  deleteFrais(index: number){
+
+  deleteFrais(index: number) {
     this.data.typeFrais.splice(index, 1);
     this.update();
   }
