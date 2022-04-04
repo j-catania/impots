@@ -28,12 +28,11 @@ export class CalculComponent implements OnInit {
   ajouterFrais() {
     const dialogRef = this.dialog.open(CreateFraisComponent, {height: '70vh', width: '80vw'});
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-      const fraisBien: any = {};
-      for (const element of result.biens) {
-        fraisBien[element.bien.id] = {pourcent: element.pourcent, ...element.bien};
-      }
       if (result) {
+        const fraisBien: any = {};
+        for (const element of result.biens) {
+          fraisBien[element.bien.id] = {pourcent: element.pourcent, ...element.bien};
+        }
         const frais: Frais = {
           id: v4(),
           nom: result.type === 'autre' ? result.autre : result.type.nom,
