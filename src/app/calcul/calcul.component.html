@@ -1,17 +1,27 @@
-  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+<table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
 
-    <ng-container matColumnDef="nom">
-      <th *matHeaderCellDef mat-header-cell> Nom</th>
-      <td *matCellDef="let element" mat-cell> {{element.nom}} - {{element.prestataire.nom}} </td>
-    </ng-container>
+  <ng-container matColumnDef="nom">
+    <th *matHeaderCellDef mat-header-cell> Nom</th>
+    <td *matCellDef="let element" mat-cell> {{element.nom}}</td>
+  </ng-container>
 
-    <ng-container *ngFor="let bien of biens" [matColumnDef]="bien.nom">
-      <th *matHeaderCellDef mat-header-cell> {{bien.nom}} </th>
-      <td *matCellDef="let element" mat-cell> {{element.prix}}€</td>
-    </ng-container>
+  <ng-container matColumnDef="prestataire">
+    <th *matHeaderCellDef mat-header-cell> Prestataire</th>
+    <td *matCellDef="let element" mat-cell>{{element.prestataire.nom}} </td>
+  </ng-container>
 
-    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  <ng-container matColumnDef="total">
+    <th *matHeaderCellDef mat-header-cell> Prix total</th>
+    <td *matCellDef="let element" mat-cell>{{element.prix}}€</td>
+  </ng-container>
 
-  </table>
-  <button (click)="ajouterFrais()" color="primary" mat-stroked-button>Ajouter un frais</button>
+  <ng-container *ngFor="let bien of biens" [matColumnDef]="bien.nom">
+    <th *matHeaderCellDef mat-header-cell> {{bien.nom}} </th>
+    <td *matCellDef="let element" mat-cell> {{element.prix * element.biens[bien.id]?.pourcent / 100}}€</td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+</table>
+<button (click)="ajouterFrais()" color="primary" mat-stroked-button>Ajouter un frais</button>

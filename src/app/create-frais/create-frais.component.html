@@ -28,36 +28,34 @@
     </mat-form-field>
   </div>
 
-  <h3>Bien(s) affecté(s)</h3>
+  <h3>TypeBien(s) affecté(s)</h3>
   <h5>Il reste {{100 - activePercent}}% à ventiller</h5>
   <div *ngFor="let bien of form.get('biens')?.value">{{bien.bien.nom}} {{bien.pourcent}}%
     ({{form.get('prix')?.value * bien.pourcent / 100}}€)
   </div>
 
   <h4>Ajouter un bien</h4>
-  <div class="flex-line">
-    <form [formGroup]="formBien">
-      <mat-form-field>
-        <mat-label>Bien</mat-label>
-        <mat-select formControlName="bien">
-          <mat-option *ngFor="let bien of biens" [value]="bien"> {{bien.nom}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Pourcentage</mat-label>
-        <input formControlName="pourcent" matInput type="number">
-        <mat-icon matSuffix>percent</mat-icon>
-      </mat-form-field>
-      <ng-container *ngIf="formBien.get('pourcent')?.value">
-        ({{form.get('prix')?.value * formBien.get('pourcent')?.value / 100}}€)
-      </ng-container>
-      <div class="flex-line">
-        <button (click)="addBien()" [disabled]="formBien.invalid && form.invalid" mat-raised-button>Ajouter le bien au
-          frais en cours
-        </button>
-      </div>
-    </form>
-  </div>
+  <form [formGroup]="formBien" class="flex-line">
+    <mat-form-field>
+      <mat-label>TypeBien</mat-label>
+      <mat-select formControlName="bien">
+        <mat-option *ngFor="let bien of biens" [value]="bien"> {{bien.nom}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Pourcentage</mat-label>
+      <input formControlName="pourcent" matInput type="number">
+      <mat-icon matSuffix>percent</mat-icon>
+    </mat-form-field>
+    <ng-container *ngIf="formBien.get('pourcent')?.value">
+      ({{form.get('prix')?.value * formBien.get('pourcent')?.value / 100}}€)
+    </ng-container>
+    <div class="flex-line">
+      <button (click)="addBien()" [disabled]="formBien.invalid && form.invalid" mat-raised-button>Ajouter le bien au
+        frais en cours
+      </button>
+    </div>
+  </form>
 
   <div class="flex-line actions">
     <button color="accent" mat-raised-button type="reset">Réinitialiser</button>

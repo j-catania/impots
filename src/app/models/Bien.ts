@@ -1,5 +1,5 @@
-export default interface Bien {
-  id: string,
-  nom: string;
-  adresse: string;
+import TypeBien from './TypeBien';
+
+export default interface Bien extends TypeBien {
+  pourcent: number
 }

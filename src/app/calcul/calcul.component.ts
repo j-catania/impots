@@ -13,7 +13,7 @@ import {AppService} from '../services/app.service';
 })
 export class CalculComponent implements OnInit {
 
-  displayedColumns = ['nom'].concat(this.appService.savedData.value.biens.map(value => value.nom))
+  displayedColumns = ['nom', 'prestataire'].concat(this.appService.savedData.value.biens.map(value => value.nom)).concat('total')
   dataSource = new MatTableDataSource()
   biens = this.appService.savedData.value.biens
 
@@ -29,13 +29,18 @@ export class CalculComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateFraisComponent, {height: '70vh', width: '80vw'});
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
+      const fraisBien: any = {};
+      for (const element of result.biens) {
+        fraisBien[element.bien.id] = {pourcent: element.pourcent, ...element.bien};
+      }
       if (result) {
         const frais: Frais = {
           id: v4(),
           nom: result.type === 'autre' ? result.autre : result.type.nom,
           prix: result.prix,
           date: result.date,
-          prestataire: result.type === 'autre' ? {nom: 'Autre'} : result.type.prestataire
+          prestataire: result.type === 'autre' ? {nom: 'Autre'} : result.type.prestataire,
+          biens: fraisBien
         }
         this.dataSource.data.push(frais)
         console.log(this.dataSource.data)
