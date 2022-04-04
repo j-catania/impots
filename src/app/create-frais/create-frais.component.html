@@ -37,7 +37,7 @@
     </div>
 
     <h4 *ngIf="activePercent !== 100">Ajouter un bien</h4>
-    <form [formGroup]="formBien" class="flex-line">
+    <form *ngIf="activePercent !== 100" [formGroup]="formBien" class="flex-line">
       <mat-form-field>
         <mat-label>TypeBien</mat-label>
         <mat-select formControlName="bien">
