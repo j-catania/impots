@@ -15,6 +15,15 @@
     <td *matCellDef="let element" mat-cell>{{element.prix}}€</td>
   </ng-container>
 
+  <ng-container matColumnDef="actions">
+    <th *matHeaderCellDef mat-header-cell> Actions</th>
+    <td *matCellDef="let element" mat-cell>
+      <button (click)="delete(element.id)" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
   <ng-container *ngFor="let bien of biens" [matColumnDef]="bien.nom">
     <th *matHeaderCellDef mat-header-cell> {{bien.nom}} </th>
     <td *matCellDef="let element" mat-cell> {{element.prix * element.biens[bien.id]?.pourcent / 100}}€</td>
@@ -24,4 +33,9 @@
   <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
 </table>
-<button (click)="ajouterFrais()" color="primary" mat-stroked-button>Ajouter un frais</button>
+<div class="flex-line actions">
+  <button (click)="ajouterFrais()" color="accent" mat-stroked-button>Ajouter un frais</button>
+  <button (click)="done()" [disabled]="dataSource.data.length === 0" color="primary" mat-stroked-button>
+    Terminer
+  </button>
+</div>

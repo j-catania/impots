@@ -13,7 +13,7 @@ import {AppService} from '../services/app.service';
 })
 export class CalculComponent implements OnInit {
 
-  displayedColumns = ['nom', 'prestataire'].concat(this.appService.savedData.value.biens.map(value => value.nom)).concat('total')
+  displayedColumns = ['nom', 'prestataire'].concat(this.appService.savedData.value.biens.map(value => value.nom)).concat('total', 'actions')
   dataSource = new MatTableDataSource()
   biens = this.appService.savedData.value.biens
 
@@ -47,6 +47,13 @@ export class CalculComponent implements OnInit {
         this.dataSource.data = this.dataSource.data;
       }
     });
+  }
 
+  delete(id: string) {
+    this.dataSource.data = this.dataSource.data.filter((item: any) => item.id !== id);
+  }
+
+  done() {
+    console.log(this.dataSource.data)
   }
 }
